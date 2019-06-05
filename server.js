@@ -26,6 +26,11 @@ io.on('connection', function(socket) {
   socket.on('disconnect', function() {
     console.log('user disconnected');
   });
+
+  // on player ready
+  socket.on('player ready', function(){
+    
+  })
 });
 
 

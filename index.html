@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
+    <title>RPSLS - Home</title>
     <base href="/">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -14,7 +14,14 @@
         <h1 class="display-4 text-center">Rock Paper Scissors Lizard Spock</h1>
       </header>
 
-      <section class="d-flex justify-content-around">
+      <section id="information_container" class="d-flex justify-content-center align-items-center flex-column">
+        <p>Ready to have some fun?</p>
+        <input type="text" id="username" class="form-control mb-3"
+          placeholder="Enter a username" aria-label="username">
+        <button id="ready_btn" class="btn btn-primary">Ready</button>
+      </section>
+
+      <section id="input_buttons_container" class="d-flex justify-content-around">
         <button class="btn btn-info">Rock</button>
         <button class="btn btn-info">Paper</button>
         <button class="btn btn-info">Scissors</button>
@@ -32,17 +39,7 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script>
-      $(function () {
-        var socket = io();
-        $('form').submit(function(e){
-          e.preventDefault(); // prevents page reloading
-          socket.emit('chat message', $('#m').val());
-          $('#m').val('');
-          return false;
-        });
-      });
-    </script>
+    <script src="/public/global.js"></script>
 
   </body>
 </html>
