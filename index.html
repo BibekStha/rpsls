@@ -3,13 +3,32 @@
   <head>
     <title>Socket.IO chat</title>
     <base href="/">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="/public/style.css">
   </head>
   <body>
-    <ul id="messages"></ul>
+
+    <main class="container">
+      <header>
+        <h1 class="display-4 text-center">Rock Paper Scissors Lizard Spock</h1>
+      </header>
+
+      <section class="d-flex justify-content-around">
+        <button class="btn btn-info">Rock</button>
+        <button class="btn btn-info">Paper</button>
+        <button class="btn btn-info">Scissors</button>
+        <button class="btn btn-info">Lizard</button>
+        <button class="btn btn-info">Spock</button>
+      </section>
+
+    </main>
+
+
+    <!-- <ul id="messages"></ul>
     <form action="">
       <input id="m" autocomplete="off" aria-label="chat-input" /><button>Send</button>
-    </form>
+    </form> -->
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
