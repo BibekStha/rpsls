@@ -1,0 +1,28 @@
+{
+  "name": "rpsls",
+  "version": "1.0.0",
+  "description": "Rock Paper Scissors Lizard Spock game",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BibekStha/rpsls.git"
+  },
+  "keywords": [
+    "rpsls",
+    "websockets",
+    "socket.io"
+  ],
+  "author": "Bibek Shrestha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BibekStha/rpsls/issues"
+  },
+  "homepage": "https://github.com/BibekStha/rpsls#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0"
+  }
+}
