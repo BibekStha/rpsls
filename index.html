@@ -14,11 +14,29 @@
         <h1 class="display-4 text-center">Rock Paper Scissors Lizard Spock</h1>
       </header>
 
-      <section id="information_container" class="d-flex justify-content-center align-items-center flex-column">
-        <p>Ready to have some fun?</p>
-        <input type="text" id="username" class="form-control mb-3"
-          placeholder="Enter a username" aria-label="username">
-        <button id="ready_btn" class="btn btn-primary">Ready</button>
+      <section id="information_container" class="d-flex justify-content-center align-items-center">
+        <div id="initial_info" class="d-flex justify-content-center align-items-center flex-column" role="initial information">
+          <p>Ready to have some fun?</p>
+          <input type="text" id="username" class="form-control mb-3"
+            placeholder="Enter a username" aria-label="username">
+          <button id="ready_btn" class="btn btn-primary">Ready</button>
+        </div>
+
+        <div id="game_info" role="game information" class="hidden d-flex flex-column">
+          <div id="game_message" class="flex-grow-1 d-flex justify-content-center align-items-center">
+            <p>dummy text</p>
+          </div>
+          <div id="choices" class="d-flex justify-content-around p-4">
+            <div id="user_choice">
+              <div class="choice_headings">Your Choice</div>
+              <div class="choices">Rock</div>
+            </div>
+            <div id="competition_choice">
+              <div class="choice_headings">Competition Choice</div>
+              <div class="choices">Paper</div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="input_buttons_container" class="d-flex justify-content-around">

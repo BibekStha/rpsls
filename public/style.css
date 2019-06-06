@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+.hidden {
+  position: absolute;
+  left: -9999999px;
+}
+
 body {
   font: 13px Helvetica, Arial;
 }
@@ -31,6 +36,12 @@ header {
 #information_container p {
   font-size: 20px;
   color: #757575;
+}
+
+#game_info {
+  width: 100%;
+  text-align: center;
+  height: 100%;
 }
 
 /* End of information container */
