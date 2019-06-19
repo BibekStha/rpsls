@@ -18,6 +18,15 @@ header {
 }
 
 /* Information container */
+#initial_info {
+  width: inherit;
+}
+
+#new_room_form, #existing_room_form {
+  flex-basis: 0;
+  padding: 80px;
+}
+
 #information_container {
   border: 1px solid #0097A7;
   border-radius: 15px;
@@ -42,6 +51,21 @@ header {
   width: 100%;
   text-align: center;
   height: 100%;
+}
+
+#new_room_form, #existing_room_form {
+  position: relative;
+}
+
+.success_message {
+  color: green;
+}
+
+.error_message {
+  color: red;
+  position: absolute;
+  top: 10%;
+  text-align: center;
 }
 
 /* End of information container */
