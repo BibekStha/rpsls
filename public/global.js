@@ -3,7 +3,10 @@ window.onload = function() {
   $(function () {
     var socket = io();
     let user = {};
-    let opponents = {};
+    let opponent = {};
+    let showChoices = 0;
+    $('#new_room_name').focus();
+    var can_make_choice = false;
 
 
     // New game room request
@@ -24,10 +27,12 @@ window.onload = function() {
       console.log('Game room created: ' + room);
       $('#new_room_form_error').html('New room created');
       user.room = room;
+      $('#room_name').html(room);
       console.log(user);
       $('#initial_info').addClass('hidden');
       $('#prior_username_form_message').html('Game room \'' + room + '\' created successfully!');
       $('#username_form').removeClass('hidden');
+      $('#username').focus();
     });
 
     // Joining an existing game room
@@ -57,6 +62,7 @@ window.onload = function() {
       $('#initial_info').addClass('hidden');
       $('#prior_username_form_message').html('Game room \'' + room + '\' joined successfully!');
       $('#username_form').removeClass('hidden');
+      $('#username').focus();
     });
 
     // Enter username
@@ -66,38 +72,83 @@ window.onload = function() {
       console.log(username);
       socket.emit('username', username);
       user.username = username;
+      $('#user_choice_heading span').html(username);
       $('#username_form').addClass('hidden');
       $('#game_info').removeClass('hidden');
+      showChoices++;
+      if(showChoices >= 2) {
+        $('#input_buttons_container').removeClass('hidden');
+        can_make_choice = true;
+      }
     });
 
     // Other user connected
     socket.on('user connected', function(user) {
-      opponents[user.sid] = user;
-      console.log(opponents);
+      opponent = user;
+      console.log(opponent);
+      if (Object.keys(opponent).length > 0 && opponent.username) {
+        $('#competition_choice_heading span').html(opponent.username);
+        $('#competition_choice_heading small').html('Opponent');
+        $('#game_message').html('Get ready!!');
+        setTimeout(() => {
+          $('#game_message').html('Game on !!');
+          $('#user_choice>p').html('Please make your choice');
+          $('#competition_choice_container .choices').html('Thinking');
+          showChoices++;
+          if(showChoices >= 2) {
+            $('#input_buttons_container').removeClass('hidden');
+            can_make_choice = true;
+          }
+        }, 2000);
+      } else if(Object.keys(opponent).length > 0) {
+        $('#competition_choice_heading span').html('Opponent');
+          $('#competition_choice_container .choices').html('Connecting');
+          $('#game_message').html('Almost there');
+      }
     })
 
-    // Emit user is ready to play
-    // $('#ready_btn').click(function() {
-    //   socket.emit('player ready', );
-    // });
+    // Make choice
+    $('#input_buttons_container i').click(function(e) {
+      if (can_make_choice) {
+        $('#input_buttons_container i').addClass('disabled');
+        $(e.target).removeClass('disabled');
+        $(e.target).addClass('choosen');
+        var choice_list = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
+        var choice_input_list = $('#input_buttons_container i');
+        var r;
+        for (i=0; i<choice_input_list.length; i++) {
+          if (choice_input_list[i] == e.target) {
+            r = i;
+          }
+        }
+        socket.emit('choice', choice_list[r]);
+        can_make_choice = false;
+        $('#user_choice>p').addClass('hidden');
+        $($('#user_choice span')[r]).removeClass('hidden');
+      }
+    })
 
-    // Emit chat message
-    // $('form').submit(function(e){
-    //   e.preventDefault(); // prevents page reloading
-    //   socket.emit('chat message', $('#m').val());
-    //   $('#m').val('');
-    //   return false;
-    // });
+    // Opponent chose
+    socket.on('opponent input', function() {
+      $('#competition_choice_container .choices').html('Made a choice');
+      $('#game_message').html('Decide quick!!');
+    })
 
+    // Get result
+    socket.on('result', function(res) {
+      console.log(res);
+    })
 
   });
 
+  
 
+  // Helper functions
   window.onbeforeunload = function(e) {
     e.preventDefault();
     e.returnValue = 'You will lose all your progress';
-    // return 'You will lose all your progress';
   }
 
+  // End of Helper functions
 }
 

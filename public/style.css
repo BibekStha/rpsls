@@ -68,11 +68,79 @@ header {
   text-align: center;
 }
 
+#game_info>* {
+  flex-basis: 0;
+  flex-grow: 2;
+}
+
+#game_info * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#user_choice_container, #competition_choice_container {
+  flex-grow: 3;
+  display: flex;
+}
+
+.choice_headings {
+  height: 30%;
+  flex-grow: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.choices {
+  flex-grow: 1;
+}
+
+p#room_name {
+  color: purple;
+}
+
 /* End of information container */
 
 /* Input buttons container */
-.btn {
-  padding: 7px 50px;
+#input_buttons_container i {
+  border: 1px solid royalblue;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
 }
+
+#input_buttons_container i:hover {
+  border: 1px solid deeppink;
+}
+
+#input_buttons_container i:hover {
+  color: deeppink;
+}
+
+.choosen, .disabled {
+  cursor: default!important; 
+}
+
+.choosen {
+  color: purple!important;
+  border: 2px solid purple!important;
+}
+
+.choosen:hover {
+  color: purple!important;
+  border: 2px solid purple!important;
+}
+
+.disabled {
+  color: #BDBDBD!important;
+  border: 1px solid #BDBDBD!important;
+}
+
+.disabled:hover {
+  color: #BDBDBD!important;
+  border: 1px solid #BDBDBD!important;
+}
+
+
 
 /* End of input buttons container */

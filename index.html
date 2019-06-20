@@ -5,6 +5,7 @@
     <base href="/">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/636e9f31ab.js"></script>
     <link rel="stylesheet" type="text/css" href="/public/style.css">
   </head>
   <body>
@@ -48,30 +49,63 @@
         </form>
 
         <!-- Game information -->
-        <div id="game_info" role="game information" class="hidden d-flex flex-column">
-          <div id="game_message" class="flex-grow-1 d-flex justify-content-center align-items-center">
-            <p>dummy text</p>
+        <div id="game_info" role="game information" class="hidden d-flex flex-row">
+          <div id="user_choice_container" class="d-flex flex-column">
+            <div id="user_choice_heading" class="choice_headings d-flex flex-column">
+              <span>&lt;your username&gt;</span>
+              <small>You</small>
+            </div>
+            <div id="user_choice" class="choices">
+              <p>Wait for your opponent</p>
+              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+                <i class="far fa-hand-rock"></i>   
+              </span>
+              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+                <i class="far fa-hand-paper"></i>        
+              </span>
+              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+                <i class="far fa-hand-scissors"></i>        
+              </span>
+              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+                <i class="far fa-hand-lizard"></i>        
+              </span>
+              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+                <i class="far fa-hand-spock"></i>        
+              </span>
+            </div>
           </div>
-          <div id="choices" class="d-flex justify-content-around p-4">
-            <div id="user_choice">
-              <div class="choice_headings">Your Choice</div>
-              <div class="choices">Rock</div>
+          <div id="game_message" class="d-flex flex-column">
+            <p>Invite your friend to play</p>
+            <p>Ask them to join your room</p>
+            <p id="room_name"></p>'
+          </div>
+          <div id="competition_choice_container" class="d-flex flex-column">
+            <div id="competition_choice_heading" class="choice_headings d-flex flex-column">
+              <span>Waiting for opponent</span>
+              <small></small>
             </div>
-            <div id="competition_choice">
-              <div class="choice_headings">Competition Choice</div>
-              <div class="choices">Paper</div>
-            </div>
+            <div class="choices"></div>
           </div>
         </div>
       </section>
 
       <!-- Choosing input -->
-      <section id="input_buttons_container" class="d-flex justify-content-around">
-        <button class="btn btn-info">Rock</button>
-        <button class="btn btn-info">Paper</button>
-        <button class="btn btn-info">Scissors</button>
-        <button class="btn btn-info">Lizard</button>
-        <button class="btn btn-info">Spock</button>
+      <section id="input_buttons_container" class="hidden d-flex justify-content-around">
+        <span style="font-size: 4em; color: royalblue;">
+          <i class="far fa-hand-rock"></i>   
+        </span>
+        <span style="font-size: 4em; color: royalblue;">
+          <i class="far fa-hand-paper"></i>        
+        </span>
+        <span style="font-size: 4em; color: royalblue;">
+          <i class="far fa-hand-scissors"></i>        
+        </span>
+        <span style="font-size: 4em; color: royalblue;">
+          <i class="far fa-hand-lizard"></i>        
+        </span>
+        <span style="font-size: 4em; color: royalblue;">
+          <i class="far fa-hand-spock"></i>        
+        </span>
       </section>
 
     </main>

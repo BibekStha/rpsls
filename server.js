@@ -5,6 +5,7 @@ var express = require('express');
 
 var rooms = {};
 var users = {};
+var choices = {};
 
 // serving static files
 // ************* very important to include this line to make static files work **********
@@ -92,7 +93,12 @@ io.on('connection', function(socket) {
       };
       consoleLog();
       socket.emit('room joined', name);
+      // socket_user = {
+      //   [sid]: users[sid]
+      // }
       socket.to(name).emit('user connected', users[sid]);
+      var opponents = roomOpponents(name, sid);
+      socket.emit('user connected', opponents);
     }
   });
 
@@ -101,12 +107,45 @@ io.on('connection', function(socket) {
     sid = socket.id;
     users[sid].username = username;
     consoleLog();
+    // socket_user = {
+    //   [sid]: users[sid]
+    // }
     socket.to(users[sid].room).emit('user connected', users[sid]);
+    var opponents = roomOpponents(users[sid].room, sid);
+    socket.emit('user connected', opponents);
   })
 
-  // on player ready
-  socket.on('player ready', function(){
-    
+  // on choices sent
+  socket.on('choice', function(choice){
+    sid = socket.id;
+    room = users[sid].room;
+    if (choices[room]) {
+      choices[room].choices_num += 1;
+    } else {
+      choices[room] = {};
+      choices[room].choices_num = 1;
+      socket.to(room).emit('opponent input');
+    }
+    choices[room][sid] = choice;
+    console.log(choices);
+    socket.to(room).emit('opponent choice');
+    if (choices[room].choices_num >= 2) {
+      result = checkWinner(room);
+      players = roomUsers(room);
+      room_choices = [
+        choices[room][players[0]],
+        choices[room][players[1]]
+      ]
+      if (result == 2) {
+        io.to(room).emit('result', 'tie');
+      } else if (result == 1) {
+        io.to(players[0]).emit('result', ['win', room_choices[1]]);
+        io.to(players[1]).emit('result', ['loss', room_choices[0]]);
+      } else {
+        io.to(players[0]).emit('result', ['loss', room_choices[1]]);
+        io.to(players[1]).emit('result', ['win', room_choices[0]]);
+      }
+    }
   })
 });
 
@@ -123,10 +162,106 @@ function roomUsers(room) {
   var roomUsers = [];
   for (var user in users) {
     if (users[user].room == room) {
-      roomUsers.push(user);
+      roomUsers.push(users[user].sid);
     }
   }
   return roomUsers;
+}
+
+function roomOpponents(room, sid) {
+  var roomOpponents = {};
+  for (var user in users) {
+    if (users[user].room == room && users[user].sid != sid) {
+      // console.log(users[user].sid);
+      roomOpponents = users[user];
+    }
+  }
+  return roomOpponents;
+}
+
+function checkWinner(room) {
+  players = roomUsers(room);
+  choice_inputs = [
+    choices[room][players[0]],
+    choices[room][players[1]]
+  ];
+
+  if (choice_inputs[0] == choice_inputs[1]) {
+    return 2;
+  }
+  
+  switch (choice_inputs.join(' ')) {
+    case 'rock paper':
+      return 0;
+      break;
+    case 'paper rock':
+      return 1;
+      break;
+      
+    case 'rock scissors':
+      return 1;
+      break;
+    case 'scissors rock':
+      return 0;
+      break;
+      
+    case 'rock lizard':
+      return 1;
+      break;
+    case 'lizard rock':
+      return 0;
+      break;
+      
+    case 'rock spock':
+      return 0;
+      break;
+    case 'spock rock':
+      return 1;
+      break;
+      
+    case 'paper scissors':
+      return 0;
+      break;
+    case 'scissors paper':
+      return 1;
+      break;
+      
+    case 'paper lizard':
+      return 0;
+      break;
+    case 'lizard paper':
+      return 1;
+      break;
+      
+    case 'paper spock':
+      return 1;
+      break;
+    case 'spock paper':
+      return 0;
+      break;
+      
+    case 'scissors lizard':
+      return 1;
+      break;
+    case 'lizard scissors':
+      return 0;
+      break;
+      
+    case 'scissors spock':
+      return 0;
+      break;
+    case 'spock scissors':
+      return 1;
+      break;
+      
+    case 'lizard spock':
+      return 1;
+      break;
+    case 'spock lizard':
+      return 0;
+      break;
+  }
+
 }
 
 // End of helper functions
