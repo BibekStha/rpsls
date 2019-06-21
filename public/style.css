@@ -17,6 +17,10 @@ header {
   padding: 20px 0 10px;
 }
 
+header h1.display-4 {
+  font-size: 36px;
+}
+
 /* Information container */
 #initial_info {
   width: inherit;

@@ -13,8 +13,11 @@ window.onload = function() {
     $('#new_room_form').submit(function(e) {
       e.preventDefault();
       console.log($('#new_room_name').val());
+      if ($('#new_room_name').val() == '') {
+        $('#new_room_form_error').html('Please enter a room name');
+      } else {
       socket.emit('new room', $('#new_room_name').val());
-      // $('#new_room_name').val('');
+      }
     });
 
     // Game room create failed
@@ -75,6 +78,13 @@ window.onload = function() {
       $('#user_choice_heading span').html(username);
       $('#username_form').addClass('hidden');
       $('#game_info').removeClass('hidden');
+      $('#header_room_name').html(user.room);
+      $('#room_name_div').removeClass('hidden');
+      $('#users_connected').html('1');
+      $('#users_connected_div').removeClass('hidden');
+      $('#user_name').html(username);
+      $('#user_name_div').removeClass('hidden');
+      $('#room_users_info').removeClass('hidden');
       showChoices++;
       if(showChoices >= 2) {
         $('#input_buttons_container').removeClass('hidden');
@@ -90,10 +100,13 @@ window.onload = function() {
         $('#competition_choice_heading span').html(opponent.username);
         $('#competition_choice_heading small').html('Opponent');
         $('#game_message').html('Get ready!!');
+        $('#users_connected').html('2');
+        $('#opponent_name').html(opponent.username);
+        $('#opponent_name_div').removeClass('hidden');
         setTimeout(() => {
           $('#game_message').html('Game on !!');
           $('#user_choice>p').html('Please make your choice');
-          $('#competition_choice_container .choices').html('Thinking');
+          $('#competition_choice_container .choices p').html('Thinking');
           showChoices++;
           if(showChoices >= 2) {
             $('#input_buttons_container').removeClass('hidden');
@@ -102,7 +115,7 @@ window.onload = function() {
         }, 2000);
       } else if(Object.keys(opponent).length > 0) {
         $('#competition_choice_heading span').html('Opponent');
-          $('#competition_choice_container .choices').html('Connecting');
+          $('#competition_choice_container .choices p').html('Connecting');
           $('#game_message').html('Almost there');
       }
     })
@@ -130,13 +143,35 @@ window.onload = function() {
 
     // Opponent chose
     socket.on('opponent input', function() {
-      $('#competition_choice_container .choices').html('Made a choice');
+      $('#competition_choice_container .choices p').html('Made a choice');
       $('#game_message').html('Decide quick!!');
     })
 
     // Get result
     socket.on('result', function(res) {
       console.log(res);
+      var choice_list = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
+      var i = choice_list.indexOf(res[1]);
+      $('#competition_choice_container .choices p').addClass('hidden');
+      $($('#competition_choice_container .choices span')[i]).removeClass('hidden');
+      if (res[0] == 'win') {
+        $('#game_message').html('Hurray you won :D');
+      } else {
+        $('#game_message').html('You lose.. Try again');
+      }
+    })
+
+    // Leave room
+    $('#leave_room').click(function() {
+      socket.emit('leave');
+      window.location.reload();
+    })
+
+    // opponent leave
+    socket.on('opponent leave', function() {
+      $('#users_connected').html('1');
+      $('#opponent_name').html('');
+      $('#opponent_name_div').addClass('hidden');
     })
 
   });

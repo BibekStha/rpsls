@@ -147,6 +147,15 @@ io.on('connection', function(socket) {
       }
     }
   })
+
+  // leave room
+  socket.on('leave', function() {
+    sid = socket.id;
+    room = users[sid].room;
+    socket.leave(room);
+    socket.to(room).emit('opponent leave');
+  })
+
 });
 
 

@@ -9,10 +9,15 @@
     <link rel="stylesheet" type="text/css" href="/public/style.css">
   </head>
   <body>
-
     <main class="container">
-      <header>
-        <h1 class="display-4 text-center">Rock Paper Scissors Lizard Spock</h1>
+      <header class="d-flex flex-row mb-4">
+        <h1 class="display-4 text-left col-sm-8 pl-5">Rock Paper Scissors Lizard Spock</h1>
+        <div id="room_users_info" class="col-sm-4 text-right pr-5 hidden">
+          <div id="room_name_div" class="hidden">Room: <span id="header_room_name"></span></div>
+          <div id="users_connected_div" class="hidden">Users connected: <span id="users_connected">0</span></div>
+          <div id="user_name_div" class="hidden"><span id="user_name"></span> (You) <a href="" id="leave_room">Leave room</a></div>
+          <div id="opponent_name_div" class="hidden"><span id="opponent_name"></span> (Opponent)</div>
+        </div>
       </header>
 
       <section id="information_container" class="d-flex justify-content-center align-items-center">
@@ -81,10 +86,27 @@
           </div>
           <div id="competition_choice_container" class="d-flex flex-column">
             <div id="competition_choice_heading" class="choice_headings d-flex flex-column">
-              <span>Waiting for opponent</span>
+              <span>Opponent</span>
               <small></small>
             </div>
-            <div class="choices"></div>
+            <div class="choices">
+              <p>Wait for your opponent</p>
+              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+                <i class="far fa-hand-rock"></i>   
+              </span>
+              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+                <i class="far fa-hand-paper"></i>        
+              </span>
+              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+                <i class="far fa-hand-scissors"></i>        
+              </span>
+              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+                <i class="far fa-hand-lizard"></i>        
+              </span>
+              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+                <i class="far fa-hand-spock"></i>        
+              </span>
+            </div>
           </div>
         </div>
       </section>
