@@ -89,6 +89,7 @@ window.onload = function() {
       if(showChoices >= 2) {
         $('#input_buttons_container').removeClass('hidden');
         can_make_choice = true;
+        showChoices = 0;
       }
     });
 
@@ -111,6 +112,7 @@ window.onload = function() {
           if(showChoices >= 2) {
             $('#input_buttons_container').removeClass('hidden');
             can_make_choice = true;
+            showChoices = 0;
           }
         }, 2000);
       } else if(Object.keys(opponent).length > 0) {
@@ -155,9 +157,9 @@ window.onload = function() {
       $('#competition_choice_container .choices p').addClass('hidden');
       $($('#competition_choice_container .choices span')[i]).removeClass('hidden');
       if (res[0] == 'win') {
-        $('#game_message').html('Hurray you won :D');
+        $('#game_message').html('Hurray you won :D<br><button id="play_again">Go again!</button>');
       } else {
-        $('#game_message').html('You lose.. Try again');
+        $('#game_message').html('You lose.. Try again!<br><button id="play_again">Go again!</button>');
       }
     })
 
@@ -172,17 +174,43 @@ window.onload = function() {
       $('#users_connected').html('1');
       $('#opponent_name').html('');
       $('#opponent_name_div').addClass('hidden');
+      $('#competition_choice_heading span').html('Opponent');
+      $('#competition_choice_heading small').html('');
+      $('#competition_choice_container .choices span').addClass('hidden');
+      $('#competition_choice_container .choices p').html('Left the room');
+      $('#game_message').html('Invite new friend to join the room');
+      $('#user_choice p').html('No opponent');
+      $('#input_buttons_container').addClass('hidden');
     })
+
+    // Play again
+    $('#game_message').on('click',$('#play_again'), function(e) {
+      $('#game_message').html('Get ready!!');
+      setTimeout(() => {
+        $('#game_message').html('Game on !!');
+        $('#user_choice>p').html('Please make your choice');
+        $('#user_choice>p').removeClass('hidden');
+        $('#user_choice>span').addClass('hidden');
+        $('#competition_choice_container .choices p').html('Thinking');
+        $('#competition_choice_container .choices p').removeClass('hidden');
+        $('#competition_choice_container .choices span').addClass('hidden');
+        $('#input_buttons_container i').removeClass('disabled');
+        $('#input_buttons_container i').removeClass('choosen');
+        can_make_choice = true;
+      }, 2000);
+    })
+
+    window.onbeforeunload = function(e) {
+      e.preventDefault();
+      e.returnValue = 'You will lose all your progress';
+    }
 
   });
 
   
 
   // Helper functions
-  window.onbeforeunload = function(e) {
-    e.preventDefault();
-    e.returnValue = 'You will lose all your progress';
-  }
+  
 
   // End of Helper functions
 }

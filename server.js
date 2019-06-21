@@ -127,7 +127,7 @@ io.on('connection', function(socket) {
       socket.to(room).emit('opponent input');
     }
     choices[room][sid] = choice;
-    console.log(choices);
+    // console.log(choices);
     socket.to(room).emit('opponent choice');
     if (choices[room].choices_num >= 2) {
       result = checkWinner(room);
@@ -145,6 +145,7 @@ io.on('connection', function(socket) {
         io.to(players[0]).emit('result', ['loss', room_choices[1]]);
         io.to(players[1]).emit('result', ['win', room_choices[0]]);
       }
+      delete choices[room];
     }
   })
 
@@ -165,6 +166,8 @@ function consoleLog() {
   console.log(users);
   console.log('rooms:');
   console.log(rooms);
+  console.log('choices');
+  console.log(choices);
 };
 
 function roomUsers(room) {
