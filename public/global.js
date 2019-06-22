@@ -30,7 +30,7 @@ window.onload = function() {
       console.log('Game room created: ' + room);
       $('#new_room_form_error').html('New room created');
       user.room = room;
-      $('#room_name').html(room);
+      // $('#room_name').html(room);
       console.log(user);
       $('#initial_info').addClass('hidden');
       $('#prior_username_form_message').html('Game room \'' + room + '\' created successfully!');
@@ -89,7 +89,7 @@ window.onload = function() {
       if(showChoices >= 2) {
         $('#input_buttons_container').removeClass('hidden');
         can_make_choice = true;
-        showChoices = 0;
+        // showChoices = 0;
       }
     });
 
@@ -109,10 +109,13 @@ window.onload = function() {
           $('#user_choice>p').html('Please make your choice');
           $('#competition_choice_container .choices p').html('Thinking');
           showChoices++;
+          console.log(showChoices);
           if(showChoices >= 2) {
             $('#input_buttons_container').removeClass('hidden');
+            $('#input_buttons_container i').removeClass('choosen');
+            $('#input_buttons_container i').removeClass('disabled');
             can_make_choice = true;
-            showChoices = 0;
+            // showChoices = 0;
           }
         }, 2000);
       } else if(Object.keys(opponent).length > 0) {
@@ -157,9 +160,11 @@ window.onload = function() {
       $('#competition_choice_container .choices p').addClass('hidden');
       $($('#competition_choice_container .choices span')[i]).removeClass('hidden');
       if (res[0] == 'win') {
-        $('#game_message').html('Hurray you won :D<br><button id="play_again">Go again!</button>');
+        $('#game_message').html('Hurray you won :D<br><button id="play_again" class="btn btn-outline-primary">Go again!</button>');
+      } else if (res[0] == 'loss'){
+        $('#game_message').html('You lose.. Try again!<br><button id="play_again" class="btn btn-outline-primary">Go again!</button>');
       } else {
-        $('#game_message').html('You lose.. Try again!<br><button id="play_again">Go again!</button>');
+        $('#game_message').html('It was a tie.. Try again!<br><button id="play_again" class="btn btn-outline-primary">Go again!</button>');
       }
     })
 
@@ -178,9 +183,13 @@ window.onload = function() {
       $('#competition_choice_heading small').html('');
       $('#competition_choice_container .choices span').addClass('hidden');
       $('#competition_choice_container .choices p').html('Left the room');
+      $('#competition_choice_container .choices p').removeClass('hidden');
       $('#game_message').html('Invite new friend to join the room');
       $('#user_choice p').html('No opponent');
+      $('#user_choice p').removeClass('hidden');
+      $('#user_choice span').addClass('hidden');
       $('#input_buttons_container').addClass('hidden');
+      showChoices--;
     })
 
     // Play again
@@ -197,7 +206,7 @@ window.onload = function() {
         $('#input_buttons_container i').removeClass('disabled');
         $('#input_buttons_container i').removeClass('choosen');
         can_make_choice = true;
-      }, 2000);
+      }, 1000);
     })
 
     window.onbeforeunload = function(e) {

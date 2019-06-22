@@ -37,6 +37,7 @@ io.on('connection', function(socket) {
     if(users[sid].room) {
       socket_room = users[sid].room;
       rooms[socket_room] -= 1;
+      socket.to(socket_room).emit('opponent leave')
       if (rooms[socket_room] < 1) {
         delete rooms[socket_room];
       }
@@ -137,7 +138,7 @@ io.on('connection', function(socket) {
         choices[room][players[1]]
       ]
       if (result == 2) {
-        io.to(room).emit('result', 'tie');
+        io.to(room).emit('result', ['tie', room_choices[1]]);
       } else if (result == 1) {
         io.to(players[0]).emit('result', ['win', room_choices[1]]);
         io.to(players[1]).emit('result', ['loss', room_choices[0]]);

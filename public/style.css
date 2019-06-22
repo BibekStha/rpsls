@@ -1,3 +1,8 @@
+/* Imports */
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Mali:600i&display=swap');
+
+/* General Styling */
 * {
   margin: 0;
   padding: 0;
@@ -10,16 +15,62 @@
 }
 
 body {
-  font: 13px Helvetica, Arial;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  background-color: #292a3d;
 }
 
 header {
   padding: 20px 0 10px;
 }
 
+header h1 {
+  font-family: 'Mali', cursive;
+  font-style: italic;
+  color: #D500F9;
+  font-weight: 600;
+}
+
 header h1.display-4 {
   font-size: 36px;
 }
+
+.btn.btn-primary, .btn.btn-outline-primary:hover  {
+  background-color: #D500F9;
+  border: 1px solid #D500F9;
+  color: white;
+}
+
+.btn.btn-outline-primary {
+  border: 1px solid #D500F9;
+  color: #D500F9;
+}
+
+input.form-control:focus {
+  /* outline-color: #D500F9; */
+  outline: 1px solid #D500F9;
+  border-color: #D500F9;
+  box-shadow: none;
+}
+
+.usernames, #header_room_name, #users_connected {
+  color: #D500F9;
+}
+
+#room_users_info {
+  font-size: 12px;
+}
+
+a#leave_room {
+  color: #D500F9;
+}
+
+a#leave_room:hover {
+  color: #aa00c7;
+  text-decoration: none;
+}
+
+/* End of general styling */
 
 /* Information container */
 #initial_info {
@@ -32,7 +83,7 @@ header h1.display-4 {
 }
 
 #information_container {
-  border: 1px solid #0097A7;
+  border: 1px solid #D500F9;
   border-radius: 15px;
 
   width: 100%;
@@ -48,13 +99,17 @@ header h1.display-4 {
 
 #information_container p {
   font-size: 20px;
-  color: #757575;
+  color: white;
 }
 
 #game_info {
   width: 100%;
   text-align: center;
   height: 100%;
+}
+
+#game_message {
+  color: #D500F9;
 }
 
 #new_room_form, #existing_room_form {
@@ -70,6 +125,7 @@ header h1.display-4 {
   position: absolute;
   top: 10%;
   text-align: center;
+  font-size: .8em;
 }
 
 #game_info>* {
@@ -114,11 +170,11 @@ p#room_name {
 }
 
 #input_buttons_container i:hover {
-  border: 1px solid deeppink;
+  border: 1px solid #D500F9;
 }
 
 #input_buttons_container i:hover {
-  color: deeppink;
+  color: #D500F9;
 }
 
 .choosen, .disabled {
@@ -126,23 +182,23 @@ p#room_name {
 }
 
 .choosen {
-  color: purple!important;
-  border: 2px solid purple!important;
+  color: #D500F9!important;
+  border: 2px solid #D500F9!important;
 }
 
 .choosen:hover {
-  color: purple!important;
-  border: 2px solid purple!important;
+  color: #D500F9!important;
+  border: 2px solid #D500F9!important;
 }
 
 .disabled {
-  color: #BDBDBD!important;
-  border: 1px solid #BDBDBD!important;
+  color: #847e8a!important;
+  border: 1px solid #847e8a!important;
 }
 
 .disabled:hover {
-  color: #BDBDBD!important;
-  border: 1px solid #BDBDBD!important;
+  color: #847e8a!important;
+  border: 1px solid #847e8a!important;
 }
 
 

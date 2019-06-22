@@ -15,8 +15,8 @@
         <div id="room_users_info" class="col-sm-4 text-right pr-5 hidden">
           <div id="room_name_div" class="hidden">Room: <span id="header_room_name"></span></div>
           <div id="users_connected_div" class="hidden">Users connected: <span id="users_connected">0</span></div>
-          <div id="user_name_div" class="hidden"><span id="user_name"></span> (You) <a href="" id="leave_room">Leave room</a></div>
-          <div id="opponent_name_div" class="hidden"><span id="opponent_name"></span> (Opponent)</div>
+          <div id="user_name_div" class="hidden"><span id="user_name" class="usernames"></span> (You) <a href="" id="leave_room">Leave room</a></div>
+          <div id="opponent_name_div" class="hidden"><span id="opponent_name" class="usernames"></span> (Opponent)</div>
         </div>
       </header>
 
@@ -57,24 +57,24 @@
         <div id="game_info" role="game information" class="hidden d-flex flex-row">
           <div id="user_choice_container" class="d-flex flex-column">
             <div id="user_choice_heading" class="choice_headings d-flex flex-column">
-              <span>&lt;your username&gt;</span>
+              <span class="usernames"></span>
               <small>You</small>
             </div>
             <div id="user_choice" class="choices">
               <p>Wait for your opponent</p>
-              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+              <span style="font-size: 7em; color: #D500F9;" class="hidden">
                 <i class="far fa-hand-rock"></i>   
               </span>
-              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+              <span style="font-size: 7em; color: #D500F9;" class="hidden">
                 <i class="far fa-hand-paper"></i>        
               </span>
-              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+              <span style="font-size: 7em; color: #D500F9;" class="hidden">
                 <i class="far fa-hand-scissors"></i>        
               </span>
-              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+              <span style="font-size: 7em; color: #D500F9;" class="hidden">
                 <i class="far fa-hand-lizard"></i>        
               </span>
-              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+              <span style="font-size: 7em; color: #D500F9;" class="hidden">
                 <i class="far fa-hand-spock"></i>        
               </span>
             </div>
@@ -82,28 +82,27 @@
           <div id="game_message" class="d-flex flex-column">
             <p>Invite your friend to play</p>
             <p>Ask them to join your room</p>
-            <p id="room_name"></p>'
           </div>
           <div id="competition_choice_container" class="d-flex flex-column">
             <div id="competition_choice_heading" class="choice_headings d-flex flex-column">
-              <span>Opponent</span>
+              <span class="usernames">Opponent</span>
               <small></small>
             </div>
             <div class="choices">
-              <p>Wait for your opponent</p>
-              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+              <p>No one here yet</p>
+              <span style="font-size: 7em; color: #D500F9;" class="hidden">
                 <i class="far fa-hand-rock"></i>   
               </span>
-              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+              <span style="font-size: 7em; color: #D500F9;" class="hidden">
                 <i class="far fa-hand-paper"></i>        
               </span>
-              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+              <span style="font-size: 7em; color: #D500F9;" class="hidden">
                 <i class="far fa-hand-scissors"></i>        
               </span>
-              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+              <span style="font-size: 7em; color: #D500F9;" class="hidden">
                 <i class="far fa-hand-lizard"></i>        
               </span>
-              <span style="font-size: 7em; color: darkcyan;" class="hidden">
+              <span style="font-size: 7em; color: #D500F9;" class="hidden">
                 <i class="far fa-hand-spock"></i>        
               </span>
             </div>
